@@ -119,39 +119,38 @@ class HBNBCommand(cmd.Cmd):
         if args:
             try:
                 args = args.split()
-                template = HBNBCommand.classes[args[0]]
-                new_instance = template()
-                try:
+                class_name = args[0]
+                if class_name in HBNBCommand.classes:
+                    template = HBNBCommand.classes[class_name]
+                    new_instance = template()
                     for pair in args[1:]:
                         pair_split = pair.split("=")
-                        if (hasattr(new_instance, pair_split[0])):
+                        if hasattr(new_instance, pair_split[0]):
                             value = pair_split[1]
                             flag = 0
-                            if (value.startswith('"')):
-                                value = value.strip('"')
-                                value = value.replace("\\", "")
-                                value = value.replace("_", " ")
-                            elif ("." in value):
+                            if value.startswith('"'):
+                                value = value.strip('"').replace("\\", "").replace("_", " ")
+                            elif "." in value:
                                 try:
                                     value = float(value)
-                                except:
+                                except ValueError:
                                     flag = 1
                             else:
                                 try:
                                     value = int(value)
-                                except:
+                                except ValueError:
                                     flag = 1
-                            if (not flag):
+                            if not flag:
                                 setattr(new_instance, pair_split[0], value)
                         else:
-                            continue
+                            print("** attribute doesn't exist **")
+                            return
                     new_instance.save()
                     print(new_instance.id)
-                except:
-                    new_instance.rollback()
-            except:
-                print("** class doesn't exist **")
-                models.storage.rollback()
+                else:
+                    print("** class doesn't exist **")
+            except Exception as e:
+                print("Error:", e)
         else:
             print("** class name missing **")
 
