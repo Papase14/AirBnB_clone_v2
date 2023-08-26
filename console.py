@@ -2,7 +2,6 @@
 """ Console Module """
 import cmd
 import sys
-from datetime import datetime
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -120,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
         if args:
             try:
                 args = args.split()
-                template = models.dummy_classes[args[0]]
+                template = HBNBCommand.classes[args[0]]
                 new_instance = template()
                 try:
                     for pair in args[1:]:
