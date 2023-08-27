@@ -10,9 +10,9 @@ from sqlalchemy.orm import relationship
 
 
 class Place(BaseModel, Base):
-    """ A place to stay """
-    
-    if getenv("HBNB_TYPE_STORAGE") == 'db':
+    """A place to stay"""
+
+    if getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = "places"
         city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
         user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
@@ -26,7 +26,12 @@ class Place(BaseModel, Base):
         longitude = Column(Float)
 
         reviews = relationship("Review", backref="place", cascade="delete")
-        amenities = relationship("Amenity", secondary="place_amenity", backref="place_amenities", viewonly=False)
+        amenities = relationship(
+            "Amenity",
+            secondary="place_amenity",
+            backref="place_amenities",
+            viewonly=False,
+        )
 
         place_amenity = Table(
             "place_amenity",
@@ -63,7 +68,6 @@ class Place(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """initializes Place"""
         super().__init__(*args, **kwargs)
-
 
     # For FileStorage
     def get_reviews(self):
