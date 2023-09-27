@@ -19,7 +19,7 @@ def hello_hbnb():
     return "Hello HBNB!"
 
 
-@app.route("/hbnb")
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """
     Returns the string "HBNB" when a request is made to the "/hbnb" URL path.
