@@ -63,12 +63,14 @@ def python(text="is cool"):
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
     """
-    Returns a string that concatenates the value of `n` (if provided) with the phrase " is a number".
+    Returns a string that includes the value of `n` formatted as a number.
 
-    :param n: (optional integer) The value of `n` is an optional parameter that represents a number.
-    :return: A string that concatenates the value of `n` (if provided) with the phrase " is a number".
+    :param n: (optional) An integer value that represents a number.
+    :type n: int
+    :return: A string that includes the value of `n` formatted as a number.
+    :rtype: str
     """
-    return str(n) + " is a number"
+    return "{:d} is a number".format(n)
 
 
 if __name__ == "__main__":
