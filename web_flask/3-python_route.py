@@ -42,25 +42,22 @@ def c(text):
     """
     return "C " + text.replace("_", " ")
 
-@app.route("/python/<text>", strict_slashes=False)
-def python(text):
-    """
-    Returns a string based on the value of the 'text' parameter.
 
-    If 'text' is not None, it returns the string "Python " followed by the value of 'text' with underscores replaced by spaces.
-    If 'text' is None, it returns the string "Python is cool".
+@app.route("/python", strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
+def python(text="is cool"):
+    """
+    Concatenates the word "Python" with the value of the "text" parameter, replacing underscores
+    with spaces if present.
 
     Args:
-        text (str): The value of the 'text' parameter passed in the URL.
+        text (str, optional): The text to be concatenated with "Python". Defaults to "is cool".
 
     Returns:
-        str: The output is a string that represents the result of the function. It can be 
-        either "Python " followed by the value of 'text' with underscores replaced by spaces, or "Python is cool" if 'text' is None.
+        str: The concatenated string.
     """
-    if text is not None:
-        return "Python " + text.replace("_", " ")
-    else:
-        return "Python is cool"
+    return "Python " + text.replace("_", " ")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
