@@ -99,11 +99,11 @@ def odd_or_even(n):
         str: A string indicating whether the number is odd or even.
     """
     if n % 2 == 0:
-        results = "{:d} is even.".format(n)
+        oddoreven = "even"
     else:
-        results = "{:d} is odd!".format(n)
+        oddoreven = "odd"
 
-    return render_template("/6-number_odd_or_even.html", results=results)
+    return render_template("/6-number_odd_or_even.html", n=n, oddoreven=oddoreven)
 
 
 if __name__ == "__main__":
