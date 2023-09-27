@@ -14,12 +14,12 @@ app = Flask(__name__)
 def filters():
     """
     Route handler for the "/hbnb_filters" URL.
-    
+
     Retrieves data from the database and renders an HTML template.
-    
+
     Returns:
         str: Rendered HTML page from the "10-hbnb_filters.html" template.
-        
+
     Example Usage:
         states = storage.all("State").values()
         amenities = storage.all("Amenity").values()
