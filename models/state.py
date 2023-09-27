@@ -10,10 +10,10 @@ from sqlalchemy.orm import relationship
 
 
 class State(BaseModel, Base):
-    """ State class """
+    """State class"""
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        __tablename__ = 'states'
+        __tablename__ = "states"
         name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state", cascade="delete")
     else:
@@ -24,8 +24,9 @@ class State(BaseModel, Base):
         super().__init__(*args, **kwargs)
 
     if getenv("HBNB_TYPE_STORAGE") != "db":
+
         @property
         def cities(self):
-            """Get all related city objects"""
+            """getter for list of city instances related to the state"""
             all_cities = list(models.storage.all(City).values)
             return [city for city in all_cities if city.state.id == self.id]
